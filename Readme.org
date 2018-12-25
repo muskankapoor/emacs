@@ -31,3 +31,6 @@ C-x o	other-window (moves foxus to the next window) goes to other window
 
 C-C- (LEFT KEY) undo confirugration
 c-c (right key)redo 
+
+For mac: open in terminal 
+open -a Emacs a.txt
