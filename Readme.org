@@ -11,17 +11,17 @@ Emacs Commands
   ctrl-h P describe-package 
   
 4. commands
-*ctrl x + (bigger)
-*ctrl x - (smaller)
-save
-alt x (escape x)
-ctr x ctrl f create file (.org to create .org)
-ctrl x ctrl e to execute
-ctrl p, n, f (to move arrow previous, next front) 
-ctrl s for search 
-ctrl r for search backwards
-alt f to move forward
-alt b to move backwards
+* ctrl x + (bigger)
+* ctrl x - (smaller)
+* save
+* alt x (escape x)
+* ctr x ctrl f create file (.org to create .org)
+* ctrl x ctrl e to execute
+* ctrl p, n, f (to move arrow previous, next front) 
+* ctrl s for search 
+* ctrl r for search backwards
+* alt f to move forward
+* alt b to move backwards
 
 
 5. switch buffers
