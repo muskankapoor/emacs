@@ -2,10 +2,10 @@
 
 Emacs Commands
 1. Org Mode
-  above (startup) control expands all 
+  * above (startup) control expands all 
 
 2. LInks
-  ctrl c ctrl l to add link
+  * ctrl c ctrl l to add link
 
 3. try allows to try packages 
   ctrl-h P describe-package 
@@ -22,6 +22,17 @@ ctrl p, n, f (to move arrow previous, next front)
  ctrl r for search backwards
  alt f to move forward
  alt b to move backwards
+ with swiper mode things get better, incremental search 
+ counsel-ctrl x ctrl f 
+ learn more to use avy 
+ 
+ 5.
+ automcompete
+ ex: 
+ in the buffer 
+ b
+ alt / automcptletes
+ 
 
 
 5. switch buffers
