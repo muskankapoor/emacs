@@ -54,3 +54,10 @@ c-c (right key)redo
 
 For mac: open in terminal 
 open -a Emacs a.txt
+
+.org
+#+BEGIN_SRC emacs-lisp
+(+ 2 3)
+#+END_SRC
+ctrl x ctrl e to (elisp inside org mode)
+or ctrl c ctrl c in the code block itself to get results
