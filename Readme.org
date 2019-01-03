@@ -43,6 +43,7 @@ M-x kill-some-buffers
 
 
 6. windows 
+C-c left or right to move through past window configurations.
 C-x 2	split-window-below (vertically)
 C-x 3	split-window-right (horizontally)
 C-x 0	delete-window (this one)
