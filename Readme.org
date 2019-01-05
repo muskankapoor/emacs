@@ -62,3 +62,12 @@ open -a Emacs a.txt
 #+END_SRC
 ctrl x ctrl e to (elisp inside org mode)
 or ctrl c ctrl c in the code block itself to get results
+
+
+c++:
+io tab
+int tab
+forn tab
+
+atl x-compile
+
