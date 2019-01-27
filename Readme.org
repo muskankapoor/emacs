@@ -71,3 +71,13 @@ forn tab
 
 atl x-compile
 
+
+terminal
+g++ ...
+a.exe 
+
+ctrl x ` to go to next mistake (back tick)
+
+terminal chekc depencdies
+g++ -MM main.cpp   
+g++ -MM *cpp (tells for all)
