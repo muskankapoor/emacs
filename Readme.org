@@ -81,3 +81,7 @@ ctrl x ` to go to next mistake (back tick)
 terminal chekc depencdies
 g++ -MM main.cpp   
 g++ -MM *cpp (tells for all)
+
+MinGW32-make
+
+alt x shell 
