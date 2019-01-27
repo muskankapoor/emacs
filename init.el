@@ -202,5 +202,3 @@
   :ensure t
   :init
 (global-flycheck-mode t))
-
-
