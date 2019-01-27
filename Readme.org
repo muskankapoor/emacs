@@ -85,3 +85,5 @@ g++ -MM *cpp (tells for all)
 MinGW32-make
 
 alt x shell 
+
+indent tab to auto complete 
