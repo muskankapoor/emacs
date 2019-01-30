@@ -87,3 +87,5 @@ MinGW32-make
 alt x shell 
 
 indent tab to auto complete 
+
+MinGW32-make 
