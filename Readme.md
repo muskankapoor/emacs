@@ -1,14 +1,14 @@
 #+STARTUP: showall 
 
-Emacs Commands
+**Emacs Commands**
 1. Org Mode
   * above (startup) control expands all 
 
-2. LInks
-  * ctrl c ctrl l to add link
+1. LInks
+ * ctrl c ctrl l to add link
 
-3. try allows to try packages 
-  ctrl-h P describe-package 
+1. try allows to try packages 
+ * ctrl-h P describe-package 
   
 4. commands
 ctrl x + (bigger)
