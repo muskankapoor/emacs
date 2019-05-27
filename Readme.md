@@ -4,9 +4,9 @@
 1. Org Mode
   * #+STARTUP: showall 
   * above (startup) control expands all 
-  2. LInks
+  ## 2. LInks
    * ctrl c ctrl l to add link
-  3. example
+  ## 3. example
  #+BEGIN_SRC emacs-lisp
  (+ 2 3)
  #+END_SRC
