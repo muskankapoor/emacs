@@ -1,52 +1,101 @@
+;; small interface tweaks
 (setq inhibit-startup-message t)
+(tool-bar-mode -1)
+(fset 'yes-or-no-p 'y-or-n-p)
+(global-set-key (kbd "<f5>") 'revert-buffer)
 
-
+;; set up package sources
 (require 'package)
 (setq package-enable-at-startup nil)
-(add-to-list 'package-archivesa
+(add-to-list 'package-archives
 	     '("melpa" . "https://melpa.org/packages/"))
-
 (package-initialize)
 
 ;; Bootstrap `use-package'
 (unless (package-installed-p 'use-package)
-	(package-refresh-contents)
-	(package-install 'use-package))
+  (package-refresh-contents)
+  (package-install 'use-package))
 
-(use-package try
-	:ensure t)
-
+;; bring up help for key bindings
 (use-package which-key
-	:ensure t 
-	:config
-	(which-key-mode))
+  :ensure t
+  :config
+  (which-key-mode))
 
+(require 'auto-complete)
+
+;; Auto completion
+(require 'auto-complete-config)
+(use-package auto-complete
+  :ensure t
+  :init
+  (progn
+    (ac-config-default)
+    (global-auto-complete-mode t)
+    ))
+
+;; start yasnippet with emacs
+(require 'yasnippet)
+(yas-global-mode 1)
+
+;; on the fly syntax checking
+(use-package flycheck
+  :ensure t
+  :init
+  (global-flycheck-mode t))
+
+(defun my:ac-c-header-init ()
+  (require 'auto-complete-c-headers)
+  (add-to-list 'ac-sources 'ac-source-c-headers))
+
+(add-hook 'c++-mode-hook 'my:ac-c-header-init)
+(add-hook 'c-mode-hook 'my:ac-c-header-init)
+
+
+;; start yasnippet with emacs
+(require 'yasnippet)
+(yas-global-mode 1)
+;; snippets and snippet expansion
+(use-package yasnippet
+  :ensure t
+  :init
+  (yas-global-mode 1))
+
+
+
+;; tags for code navigation
+(use-package ggtags
+  :ensure t
+  :config
+  (add-hook 'c-mode-common-hook
+	    (lambda ()
+	      (when (derived-mode-p 'c-mode 'c++-mode 'java-mode)
+		(ggtags-mode 1))))
+  )
+
+
+;; org bullets
 (use-package org-bullets
   :ensure t
   :config
   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
 
 
-(tool-bar-mode -1)
-
-;;(setq ido-enable-flex-matching t)
-;;(setq ido-everywhere t)
-;;(ido-mode 1)
-
+;; list of buffers
 (defalias 'list-buffers 'ibuffer) ; make ibuffer default
 
 (defalias 'list-buffers 'ibuffer-other-window) ; make ibuffer default
 
+;; tabbar
 (use-package tabbar
   :ensure t
   :config (tabbar-mode 1)
   )
 
-
 (windmove-default-keybindings)
 
 
-; add this to init.el
+;; ace 
 (use-package ace-window
   :ensure t
   :init
@@ -57,7 +106,6 @@
        ((t (:inherit ace-jump-face-foreground :height 3.0))))) 
     ))
 
-
 (winner-mode 1)
 
 ;; it looks like counsel is a requirement for swiper
@@ -65,6 +113,7 @@
   :ensure t
   )
 
+;; swiper
 (use-package swiper
   :ensure try
   :config
@@ -89,21 +138,14 @@
     (define-key read-expression-map (kbd "C-r") 'counsel-expression-history)
     ))
 
+
+;; avy 
 (use-package avy
   :ensure t
   :config
   (avy-setup-default))
 
-(use-package auto-complete
-  :ensure t
-  :init
-  (progn
-    (ac-config-default)
-    (global-auto-complete-mode t)
-    ))
-
-
-
+;; background and themes
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -120,7 +162,6 @@
  ;; If there is more than one, they won't work right.
  '(aw-leading-char-face ((t (:inherit ace-jump-face-foreground :height 3.0)))))
 
-
 (load-theme 'manoj-dark)
 
 
@@ -132,18 +173,16 @@
 `
 
 (use-package elpy
-:ensure t
-:config 
-(elpy-enable))
-
-
-(use-package yasnippet
   :ensure t
-  :config
-  (use-package yasnippet-snippets
-    :ensure t)
-  (yes-reload-all))
-  (yas-global-mode 1))
+  :config 
+  (elpy-enable))
+
+
+
+;; it looks like counsel is a requirement for swiper
+(use-package counsel
+  :ensure t
+  )
 
 
 ;; make tab key always call a indent command.
@@ -156,49 +195,20 @@
 (setq-default tab-always-indent 'complete)
 
 
-;; set up package sources
-(require 'package)
-(setq package-enable-at-startup nil)
-(add-to-list 'package-archives
-	     '("melpa" . "https://melpa.org/packages/"))
-(package-initialize)
-
-;; Bootstrap `use-package'
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
-
-;; small interface tweaks
-(setq inhibit-startup-message t)
-(tool-bar-mode -1)
-(fset 'yes-or-no-p 'y-or-n-p)
-(global-set-key (kbd "<f5>") 'revert-buffer)
-
-;; bring up help for key bindings
-(use-package which-key
-  :ensure t 
-  :config
-  (which-key-mode))
+;; -- sets up cygwin
+(let* ((cygwin-root "c:/cygwin")
+       (cygwin-bin (concat cygwin-root "/bin")))
+  (when (and (eq 'windows-nt system-type)
+	     (file-readable-p cygwin-root))
+    (setq exec-path (cons cygwin-bin exec-path))
+    (setenv "PATH" (concat cygwin-bin ";" (getenv "PATH")))
+    (setq shell-file-name "bash")
+    (setenv "SHELL" shell-file-name) 
+    (setq explicit-shell-file-name shell-file-name) 
+    (add-hook 'comint-output-filter-functions 'comint-strip-ctrl-m)))
 
 
-;; Auto completion
-(use-package auto-complete
-  :ensure t
-  :init
-  (progn
-    (ac-config-default)
-    (global-auto-complete-mode t)
-    ))
+(load-theme 'manoj-dark)
 
 
-;; snippets and snippet expansion
-(use-package yasnippet
-  :ensure t
-  :init
-  (yas-global-mode 1))
-
-
-(use-package flycheck
-  :ensure t
-  :init
-(global-flycheck-mode t))
+(set-face-attribute 'default nil :height 200)
